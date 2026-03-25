@@ -468,8 +468,7 @@
   <div class="hero-right">
     <div class="hero-card">
       <div class="hero-photo-wrap" id="photoWrap">
-        <!-- Replace the initials below with: <img src="your-photo.jpg" alt="Arun Suthar"> -->
-        AS
+        <img src="profile_pic.jpg" alt="Arun Suthar">
       </div>
       <div class="hero-card-name">Arun Suthar</div>
       <div class="hero-card-role">Senior Firmware Engineer · Bengaluru, India</div>
@@ -913,20 +912,24 @@
     </div>
 
     <div class="contact-form-wrap reveal">
-      <div class="form-title">Send a message</div>
-      <div class="form-group">
-        <label>Name</label>
-        <input type="text" placeholder="Your name" />
-      </div>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" placeholder="your@email.com" />
-      </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea placeholder="What's on your mind?"></textarea>
-      </div>
-      <button class="btn-form" onclick="handleFormSubmit(this)">Send Message →</button>
+      <form action="https://formsubmit.co/arunsuthar98@gmail.com" method="POST">
+        <div class="form-title">Send a message</div>
+        <div class="form-group">
+          <label>Name</label>
+          <input type="text" name="name" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea name="message" placeholder="What's on your mind?" required></textarea>
+        </div>
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://arunsuthar98.github.io/">
+        <button type="submit" class="btn-form">Send Message →</button>
+      </form>
     </div>
   </div>
 </section>
@@ -972,19 +975,6 @@
   document.querySelectorAll('.timeline-item.reveal, .skill-category.reveal, .edu-card.reveal, .cert-card.reveal').forEach((el, i) => {
     el.style.transitionDelay = `${(i % 4) * 80}ms`;
   });
-
-  /* ── FORM ── */
-  function handleFormSubmit(btn) {
-    const inputs = btn.closest('.contact-form-wrap').querySelectorAll('input, textarea');
-    let valid = true;
-    inputs.forEach(inp => { if (!inp.value.trim()) { inp.style.borderColor='rgba(255,80,80,0.5)'; valid=false; } else { inp.style.borderColor=''; } });
-    if (!valid) return;
-    btn.textContent = 'Message Sent ✓';
-    btn.style.background = '#007a7a';
-    btn.disabled = true;
-    inputs.forEach(inp => inp.value = '');
-    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background=''; btn.disabled=false; }, 3000);
-  }
 
   /* ── ACTIVE NAV LINK ── */
   const sections = document.querySelectorAll('section[id]');
