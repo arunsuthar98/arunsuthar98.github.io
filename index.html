@@ -3,116 +3,999 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arun Suthar</title>
+  <title>Arun Suthar — Senior Firmware Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    :root {
+      --ink:        #0f0f0f;
+      --ink-2:      #3a3a3a;
+      --ink-3:      #717171;
+      --surface:    #fafaf8;
+      --surface-2:  #f2f1ee;
+      --surface-3:  #e8e6e1;
+      --accent:     #0057ff;
+      --accent-2:   #e8f0ff;
+      --accent-3:   #003dbb;
+      --infineon:   #009999;
+      --marvell:    #cc0000;
+      --border:     #e0ddd8;
+      --serif:      'DM Serif Display', Georgia, serif;
+      --sans:       'DM Sans', system-ui, sans-serif;
+      --mono:       'JetBrains Mono', monospace;
+      --ease:       cubic-bezier(0.22, 1, 0.36, 1);
+      --shadow-sm:  0 1px 3px rgba(0,0,0,0.07), 0 1px 2px rgba(0,0,0,0.04);
+      --shadow-md:  0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.04);
+      --shadow-lg:  0 12px 40px rgba(0,0,0,0.10), 0 4px 12px rgba(0,0,0,0.05);
+    }
+
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f0f2f5;
-      margin: 0;
-      padding: 0;
-      color: #333;
+      font-family: var(--sans);
+      background: var(--surface);
+      color: var(--ink);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    header {
-      background: linear-gradient(135deg, #4b6cb7, #182848);
-      color: white;
-      padding: 3rem 1rem;
-      text-align: center;
-    }
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--surface-2); }
+    ::-webkit-scrollbar-thumb { background: var(--surface-3); border-radius: 99px; }
 
-    header h1 {
-      margin: 0;
-      font-size: 2.5rem;
-    }
+    /* ── SELECTION ── */
+    ::selection { background: var(--accent-2); color: var(--accent-3); }
 
-    header p {
-      margin-top: 0.5rem;
-      font-size: 1.2rem;
-      font-weight: 300;
-    }
+    /* ── CURSOR DOT ── */
+    .cursor { position: fixed; width: 8px; height: 8px; background: var(--accent); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%, -50%); transition: transform 0.1s, width 0.2s var(--ease), height 0.2s var(--ease), opacity 0.2s; mix-blend-mode: multiply; }
+    .cursor-ring { position: fixed; width: 36px; height: 36px; border: 1.5px solid var(--accent); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%, -50%); transition: transform 0.12s var(--ease), width 0.3s var(--ease), height 0.3s var(--ease), opacity 0.3s; opacity: 0.5; }
 
-    section {
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 64px;
+      background: rgba(250,250,248,0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s, box-shadow 0.3s;
+    }
+    nav.scrolled { border-color: var(--border); box-shadow: var(--shadow-sm); }
+    .nav-logo {
+      font-family: var(--serif); font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { font-size: 0.82rem; font-weight: 500; color: var(--ink-2); text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--accent); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.45rem 1rem; border-radius: 6px;
+      background: var(--ink); color: #fff !important;
+      font-size: 0.78rem !important; font-weight: 500 !important; letter-spacing: 0.05em;
+      text-transform: uppercase; transition: background 0.2s, transform 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--accent) !important; transform: translateY(-1px); color: #fff !important; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      padding: 100px clamp(1.5rem, 6vw, 5rem) 80px;
+      gap: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg-grid {
+      position: absolute; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 48px 48px;
+      opacity: 0.45;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+    }
+    .hero-left { position: relative; z-index: 1; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.3rem 0.75rem; border-radius: 99px;
+      background: var(--accent-2); color: var(--accent-3);
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.04em; margin-bottom: 1.5rem;
+      border: 1px solid rgba(0,87,255,0.15);
+      opacity: 0; transform: translateY(12px);
+      animation: fadeUp 0.6s var(--ease) 0.1s forwards;
+    }
+    .hero-tag .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s var(--ease) 0.2s forwards;
+    }
+    .hero-title {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 400; color: var(--ink-2);
+      margin-bottom: 1.5rem;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s var(--ease) 0.3s forwards;
+    }
+    .hero-title strong { color: var(--accent); font-weight: 600; }
+    .hero-desc {
+      font-size: 0.975rem; color: var(--ink-3); line-height: 1.75;
+      max-width: 460px; margin-bottom: 2.5rem;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s var(--ease) 0.4s forwards;
+    }
+    .hero-actions {
+      display: flex; gap: 1rem; flex-wrap: wrap;
+      opacity: 0; transform: translateY(16px);
+      animation: fadeUp 0.7s var(--ease) 0.5s forwards;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 8px;
+      background: var(--ink); color: #fff;
+      font-size: 0.875rem; font-weight: 500; text-decoration: none;
+      transition: background 0.2s, transform 0.2s var(--ease), box-shadow 0.2s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,87,255,0.25); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.75rem; border-radius: 8px;
+      border: 1.5px solid var(--border); color: var(--ink);
+      font-size: 0.875rem; font-weight: 500; text-decoration: none;
+      background: transparent;
+      transition: border-color 0.2s, color 0.2s, transform 0.2s var(--ease);
+    }
+    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-right {
+      position: relative; z-index: 1;
+      opacity: 0; transform: translateX(24px);
+      animation: fadeRight 0.8s var(--ease) 0.4s forwards;
+    }
+    .hero-card {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
       padding: 2rem;
-      max-width: 900px;
-      margin: 2rem auto;
-      background-color: white;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      box-shadow: var(--shadow-lg);
     }
-
-    section h2 {
-      border-bottom: 2px solid #4b6cb7;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-      color: #4b6cb7;
+    .hero-photo-wrap {
+      width: 72px; height: 72px; border-radius: 50%;
+      overflow: hidden; background: var(--surface-2);
+      border: 2px solid var(--border); margin-bottom: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--serif); font-size: 1.75rem; color: var(--ink-3);
     }
-
-    ul {
-      list-style-type: disc;
-      padding-left: 1.5rem;
+    .hero-photo-wrap img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-card-name { font-family: var(--serif); font-size: 1.3rem; margin-bottom: 0.15rem; }
+    .hero-card-role { font-size: 0.82rem; color: var(--ink-3); margin-bottom: 1.25rem; }
+    .hero-stats {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+      margin-bottom: 1.5rem;
     }
-
-    a {
-      color: #4b6cb7;
-      text-decoration: none;
+    .stat-box {
+      background: var(--surface-2); border-radius: 10px;
+      padding: 0.75rem 1rem;
     }
-
-    a:hover {
-      text-decoration: underline;
+    .stat-val { font-family: var(--serif); font-size: 1.6rem; color: var(--ink); line-height: 1; }
+    .stat-label { font-size: 0.72rem; color: var(--ink-3); margin-top: 0.15rem; font-weight: 500; letter-spacing: 0.03em; text-transform: uppercase; }
+    .hero-tags-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .badge {
+      padding: 0.25rem 0.6rem; border-radius: 99px;
+      font-family: var(--mono); font-size: 0.68rem; font-weight: 500;
+      background: var(--surface-2); color: var(--ink-2);
+      border: 1px solid var(--border);
     }
+    .badge.blue { background: var(--accent-2); color: var(--accent-3); border-color: rgba(0,87,255,0.15); }
+    .badge.green { background: #e6f7f5; color: #007a7a; border-color: rgba(0,153,153,0.2); }
 
+    /* ── SECTION BASICS ── */
+    section { padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 5rem); }
+    .section-label {
+      font-family: var(--mono); font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+    .section-title {
+      font-family: var(--serif); font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+      line-height: 1.1; letter-spacing: -0.025em;
+      color: var(--ink); margin-bottom: 1rem;
+    }
+    .section-sub { font-size: 0.975rem; color: var(--ink-3); max-width: 540px; line-height: 1.7; }
+    .divider { width: 48px; height: 2px; background: var(--accent); margin: 1.5rem 0; border-radius: 99px; }
+
+    /* ── ABOUT ── */
+    #about { background: #fff; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+    .about-text p { font-size: 0.975rem; color: var(--ink-2); line-height: 1.85; margin-bottom: 1.1rem; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text em { font-style: italic; color: var(--ink); }
+    .about-side { display: flex; flex-direction: column; gap: 1.5rem; }
+    .info-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; }
+    .info-block-title { font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 0.75rem; }
+    .info-row { display: flex; align-items: center; gap: 0.6rem; font-size: 0.875rem; color: var(--ink-2); margin-bottom: 0.4rem; }
+    .info-row:last-child { margin-bottom: 0; }
+    .info-row svg { flex-shrink: 0; color: var(--accent); }
+    .info-row a { color: var(--ink-2); text-decoration: none; transition: color 0.2s; }
+    .info-row a:hover { color: var(--accent); }
+    .social-row { display: flex; gap: 0.75rem; flex-wrap: wrap; }
+    .social-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      padding: 0.4rem 0.85rem; border-radius: 6px;
+      border: 1px solid var(--border); color: var(--ink-2);
+      font-size: 0.78rem; font-weight: 500; text-decoration: none;
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+    }
+    .social-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-2); }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--surface); }
+    .timeline { position: relative; padding-left: 2rem; }
+    .timeline::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 1.5px; background: linear-gradient(to bottom, var(--accent), var(--border)); border-radius: 99px; }
+    .timeline-item { position: relative; margin-bottom: 3rem; }
+    .timeline-item:last-child { margin-bottom: 0; }
+    .timeline-dot { position: absolute; left: -2.45rem; top: 6px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid var(--accent); background: var(--surface); transition: background 0.2s; }
+    .timeline-item:hover .timeline-dot { background: var(--accent); }
+    .timeline-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      transition: box-shadow 0.3s, transform 0.3s var(--ease), border-color 0.3s;
+    }
+    .timeline-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); border-color: rgba(0,87,255,0.2); }
+    .timeline-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 0.75rem; flex-wrap: wrap; }
+    .company-logo {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--mono); font-size: 0.6rem; font-weight: 700;
+      border: 1px solid var(--border); flex-shrink: 0;
+    }
+    .logo-infineon { background: #e6f7f5; color: var(--infineon); }
+    .logo-marvell { background: #fff0f0; color: var(--marvell); }
+    .logo-techiesms { background: #f0f4ff; color: #4a6fa5; }
+    .logo-gtu { background: #f5f0e6; color: #8a6a00; }
+    .company-info { flex: 1; }
+    .company-name { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+    .role-title { font-family: var(--serif); font-size: 1.15rem; color: var(--ink); margin-bottom: 0.2rem; }
+    .role-meta { font-size: 0.78rem; color: var(--ink-3); display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; }
+    .role-meta .sep { opacity: 0.4; }
+    .role-badge {
+      padding: 0.2rem 0.55rem; border-radius: 99px;
+      font-size: 0.68rem; font-weight: 600; letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+    .badge-current { background: #e6f7f5; color: #007a7a; }
+    .badge-past { background: var(--surface-2); color: var(--ink-3); }
+    .role-desc { font-size: 0.895rem; color: var(--ink-2); line-height: 1.75; margin-bottom: 1rem; }
+    .skill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .chip {
+      padding: 0.22rem 0.6rem; border-radius: 6px;
+      font-family: var(--mono); font-size: 0.67rem; font-weight: 500;
+      background: var(--surface-2); color: var(--ink-2);
+      border: 1px solid var(--border);
+    }
+    .chip.accent { background: var(--accent-2); color: var(--accent-3); border-color: rgba(0,87,255,0.15); }
+
+    /* ── SKILLS ── */
+    #skills { background: #fff; }
+    .skills-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .skill-category { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 1.5rem; }
+    .skill-cat-title { font-family: var(--mono); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+    .skill-cat-title::before { content: ''; width: 8px; height: 8px; border-radius: 2px; background: var(--accent); flex-shrink: 0; }
+    .skill-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-pill {
+      padding: 0.35rem 0.8rem; border-radius: 8px;
+      font-size: 0.82rem; font-weight: 500; color: var(--ink-2);
+      background: #fff; border: 1px solid var(--border);
+      transition: all 0.2s;
+    }
+    .skill-pill:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-2); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
+    .skill-pill.verified { border-color: rgba(0,87,255,0.25); background: var(--accent-2); color: var(--accent-3); }
+    .skill-pill.verified::after { content: ' ✓'; font-size: 0.65rem; opacity: 0.7; }
+    .linkedin-note { font-size: 0.72rem; color: var(--ink-3); margin-top: 0.5rem; font-family: var(--mono); }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--surface); }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .edu-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 14px;
+      padding: 1.5rem 1.75rem;
+      transition: box-shadow 0.3s, transform 0.3s var(--ease);
+    }
+    .edu-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .edu-degree { font-family: var(--serif); font-size: 1.15rem; color: var(--ink); margin-bottom: 0.2rem; }
+    .edu-field { font-size: 0.85rem; color: var(--accent); font-weight: 500; margin-bottom: 0.35rem; }
+    .edu-school { font-size: 0.9rem; font-weight: 600; color: var(--ink-2); margin-bottom: 0.2rem; }
+    .edu-year { font-family: var(--mono); font-size: 0.75rem; color: var(--ink-3); }
+
+    /* ── CERTIFICATIONS ── */
+    .cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-top: 2.5rem; }
+    .cert-card {
+      background: #fff; border: 1px solid var(--border); border-radius: 12px;
+      padding: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;
+      transition: box-shadow 0.2s, transform 0.2s var(--ease);
+    }
+    .cert-card:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+    .cert-name { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+    .cert-issuer { font-size: 0.8rem; color: var(--ink-3); }
+    .cert-year { font-family: var(--mono); font-size: 0.72rem; color: var(--accent); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--ink); color: #fff; }
+    #contact .section-label { color: rgba(255,255,255,0.4); }
+    #contact .section-title { color: #fff; }
+    #contact .section-sub { color: rgba(255,255,255,0.55); }
+    #contact .divider { background: rgba(255,255,255,0.2); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem 1.25rem; border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.1);
+      text-decoration: none; color: #fff;
+      background: rgba(255,255,255,0.04);
+      transition: background 0.2s, border-color 0.2s, transform 0.2s var(--ease);
+    }
+    .contact-link:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.2); transform: translateX(4px); }
+    .contact-link-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .contact-link-label { font-size: 0.75rem; color: rgba(255,255,255,0.45); font-family: var(--mono); letter-spacing: 0.05em; text-transform: uppercase; }
+    .contact-link-val { font-size: 0.9rem; font-weight: 500; }
+    .contact-form-wrap { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 2rem; }
+    .form-title { font-family: var(--serif); font-size: 1.3rem; color: #fff; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.78rem; color: rgba(255,255,255,0.45); font-family: var(--mono); letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 0.4rem; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 0.7rem 0.9rem;
+      background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 8px; color: #fff; font-family: var(--sans); font-size: 0.9rem;
+      outline: none; transition: border-color 0.2s;
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+    .form-group input:focus, .form-group textarea:focus { border-color: rgba(255,255,255,0.35); }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .btn-form {
+      width: 100%; padding: 0.8rem; border-radius: 8px;
+      background: var(--accent); color: #fff; border: none;
+      font-family: var(--sans); font-size: 0.875rem; font-weight: 600;
+      cursor: pointer; transition: background 0.2s, transform 0.2s var(--ease);
+      letter-spacing: 0.02em;
+    }
+    .btn-form:hover { background: var(--accent-3); transform: translateY(-1px); }
+
+    /* ── FOOTER ── */
     footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #e9ecef;
-      font-size: 0.9rem;
+      padding: 2rem clamp(1.5rem, 6vw, 5rem);
+      background: var(--ink); border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); }
+    footer .footer-mono { font-family: var(--mono); font-size: 0.72rem; color: rgba(255,255,255,0.2); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeRight {
+      from { opacity: 0; transform: translateX(24px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── MOBILE ── */
+    @media (max-width: 900px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { display: none; }
+      .about-grid, .contact-grid, .skills-layout, .edu-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>Arun Suthar</h1>
-    <p>Engineer | Web Enthusiast</p>
-  </header>
 
-  <section>
-    <h2>About Me</h2>
-    <p>Hello! I'm Arun Suthar, an engineer with a passion for developing user-friendly websites and applications. I enjoy turning complex problems into simple, beautiful, and intuitive designs.</p>
-  </section>
+<!-- Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-  <section>
-    <h2>Education</h2>
-    <ul>
-      <li><strong>M.Tech in Engineering</strong> – Malaviya National Institute of Technology (MNIT), Jaipur</li>
-      <li><strong>B.Tech in Engineering</strong> – Government Engineering College (GEC), Gandhinagar</li>
-    </ul>
-  </section>
+<!-- ── NAV ── -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">Arun<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-cta">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Contact
+    </a></li>
+  </ul>
+</nav>
 
-  <section>
-    <h2>Experience</h2>
-    <ul>
-      <li><strong>Engineer at Marvell Technology</strong> – 2 years of experience in developing and optimizing hardware solutions.</li>
-      <li><strong>Intern at Techinesms</strong> – Gained practical experience in software development and project management.</li>
-    </ul>
-  </section>
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-bg-grid"></div>
 
-  <section>
-    <h2>Projects</h2>
-    <ul>
-      <li><strong>Portfolio Website</strong> – A personal website to showcase my projects and skills.</li>
-      <li><strong>Blog Platform</strong> – Developed a platform for sharing articles and tutorials.</li>
-      <li><strong>E-commerce Site</strong> – Created an online store with user-friendly interface and secure payment integration.</li>
-    </ul>
-  </section>
+  <div class="hero-left">
+    <div class="hero-tag">
+      <span class="dot"></span>
+      Available for Senior / Lead roles
+    </div>
+    <h1 class="hero-name">Arun Suthar</h1>
+    <p class="hero-title">
+      Senior Firmware Engineer at <strong>Infineon Technologies</strong>
+    </p>
+    <p class="hero-desc">
+      Embedded systems and firmware engineer specialising in automotive Ethernet, Linux device drivers, and real-time OS development. 3+ years delivering production-grade solutions across Infineon and Marvell.
+    </p>
+    <div class="hero-actions">
+      <a href="#experience" class="btn-primary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+        View Experience
+      </a>
+      <a href="mailto:arunsuthar98@gmail.com" class="btn-secondary">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Get in Touch
+      </a>
+    </div>
+  </div>
 
-  <section>
-    <h2>Contact</h2>
-    <p>Email: <a href="mailto:arunsuthar98@gmail.com">arunsuthar98@gmail.com</a></p>
-    <p>LinkedIn: <a href="https://www.linkedin.com/in/arunsuthar98" target="_blank">linkedin.com/in/arunsuthar98</a></p>
-  </section>
+  <div class="hero-right">
+    <div class="hero-card">
+      <div class="hero-photo-wrap" id="photoWrap">
+        <!-- Replace the initials below with: <img src="your-photo.jpg" alt="Arun Suthar"> -->
+        AS
+      </div>
+      <div class="hero-card-name">Arun Suthar</div>
+      <div class="hero-card-role">Senior Firmware Engineer · Bengaluru, India</div>
+      <div class="hero-stats">
+        <div class="stat-box">
+          <div class="stat-val">3+</div>
+          <div class="stat-label">Years Exp.</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val">2</div>
+          <div class="stat-label">Companies</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val">M.Tech</div>
+          <div class="stat-label">MNIT Jaipur</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-val">6+</div>
+          <div class="stat-label">IoT Projects</div>
+        </div>
+      </div>
+      <div class="hero-tags-row">
+        <span class="badge blue">Linux Drivers</span>
+        <span class="badge blue">FreeRTOS</span>
+        <span class="badge green">Automotive Ethernet</span>
+        <span class="badge">C / C++</span>
+        <span class="badge">QNX</span>
+        <span class="badge">ASPICE</span>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    &copy; 2025 Arun Suthar
-  </footer>
+<!-- ── ABOUT ── -->
+<section id="about">
+  <div class="reveal">
+    <p class="section-label">// 01 — About</p>
+    <h2 class="section-title">Engineer at the edge<br>of hardware & software.</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="about-grid">
+    <div class="about-text reveal">
+      <p>
+        I'm <em>Arun Suthar</em>, a Senior Firmware Engineer at <em>Infineon Technologies</em> in Bengaluru, working at the intersection of automotive networking, real-time operating systems, and low-level driver development.
+      </p>
+      <p>
+        My work focuses on firmware development for <em>Infineon's automotive Ethernet switch solutions</em> — building Ethernet drivers, integrating PTP and lwIP stacks on FreeRTOS, and developing internal protocols such as ARP and I2C. I also handle switch configuration, SDK build setup, and test automation pipelines.
+      </p>
+      <p>
+        Before Infineon, I spent over two years at <em>Marvell Technology</em> contributing to the Driver Development Team, designing and developing drivers for Marvell Automotive Ethernet Switches on Linux and QNX (io-sock and io-pkt). I also have hands-on experience with IoT hardware, PCB design (2-layer boards), and ESP32-based embedded systems from my earlier engineering roles.
+      </p>
+      <p>
+        I hold an M.Tech in Embedded Systems from <em>MNIT Jaipur</em> and a B.E. in Electronics & Communication from <em>GEC Gandhinagar</em>.
+      </p>
+    </div>
+    <div class="about-side reveal">
+      <div class="info-block">
+        <div class="info-block-title">Contact & Location</div>
+        <div class="info-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:arunsuthar98@gmail.com">arunsuthar98@gmail.com</a>
+        </div>
+        <div class="info-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Bengaluru, Karnataka, India
+        </div>
+        <div class="info-row">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/></svg>
+          Infineon Technologies · Full-time
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title">Online Profiles</div>
+        <div class="social-row">
+          <a href="https://linkedin.com/in/arunsuthar98" target="_blank" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+          <a href="https://github.com/arunsuthar98" target="_blank" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            GitHub
+          </a>
+          <a href="https://www.hackster.io/arunsuthar98" target="_blank" class="social-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+            Hackster
+          </a>
+        </div>
+      </div>
+      <div class="info-block">
+        <div class="info-block-title">Domain Expertise</div>
+        <div class="skill-grid">
+          <span class="skill-pill">Automotive Ethernet</span>
+          <span class="skill-pill">Linux Drivers</span>
+          <span class="skill-pill">FreeRTOS</span>
+          <span class="skill-pill">QNX (io-sock)</span>
+          <span class="skill-pill">lwIP Stack</span>
+          <span class="skill-pill">PTP / IEEE 1588</span>
+          <span class="skill-pill">IoT / ESP32</span>
+          <span class="skill-pill">PCB Design</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EXPERIENCE ── -->
+<section id="experience">
+  <div class="reveal">
+    <p class="section-label">// 02 — Experience</p>
+    <h2 class="section-title">Where I've built things<br>that matter.</h2>
+    <div class="divider"></div>
+    <p class="section-sub">3+ years across two industry-leading semiconductor companies, shipping firmware for automotive networking silicon.</p>
+  </div>
+
+  <div class="timeline" style="margin-top: 3rem;">
+
+    <!-- Infineon -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div style="display:flex;gap:1rem;align-items:flex-start;flex:1">
+            <div class="company-logo logo-infineon">IFX</div>
+            <div class="company-info">
+              <div class="role-title">Senior Firmware Engineer</div>
+              <div class="company-name">Infineon Technologies</div>
+              <div class="role-meta">
+                <span>Aug 2025 – Present</span>
+                <span class="sep">·</span>
+                <span>Full-time · On-site</span>
+                <span class="sep">·</span>
+                <span>Bengaluru, India</span>
+              </div>
+            </div>
+          </div>
+          <span class="role-badge badge-current">Current</span>
+        </div>
+        <p class="role-desc">
+          Working on firmware development for Infineon's automotive Ethernet switch solutions. Responsibilities include building and maintaining Ethernet drivers, integrating PTP (IEEE 1588) and lwIP stack on FreeRTOS, and developing internal protocols (ARP, I2C). Additional focus areas include switch configuration, SDK build setup, and building test automation infrastructure.
+        </p>
+        <div class="skill-chips">
+          <span class="chip accent">FreeRTOS</span>
+          <span class="chip accent">Ethernet Drivers</span>
+          <span class="chip accent">lwIP</span>
+          <span class="chip accent">PTP / IEEE 1588</span>
+          <span class="chip">ARP / I2C</span>
+          <span class="chip">SDK Build</span>
+          <span class="chip">Test Automation</span>
+          <span class="chip">Automotive Ethernet</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marvell Senior -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div style="display:flex;gap:1rem;align-items:flex-start;flex:1">
+            <div class="company-logo logo-marvell">MVL</div>
+            <div class="company-info">
+              <div class="role-title">Senior Software / Firmware Engineer</div>
+              <div class="company-name">Marvell Technology</div>
+              <div class="role-meta">
+                <span>Jul 2024 – Aug 2025</span>
+                <span class="sep">·</span>
+                <span>1 yr 2 mos · Full-time · On-site</span>
+                <span class="sep">·</span>
+                <span>Bengaluru, India</span>
+              </div>
+            </div>
+          </div>
+          <span class="role-badge badge-past">Marvell</span>
+        </div>
+        <p class="role-desc">
+          Contributed as part of the Driver Development Team to design and develop drivers for Marvell Automotive Ethernet Switches, with support for Linux and QNX operating systems (io-sock and io-pkt). Worked on driver architecture, OS integration layers, and maintaining compatibility across platform configurations.
+        </p>
+        <div class="skill-chips">
+          <span class="chip accent">Linux Device Drivers</span>
+          <span class="chip accent">QNX io-sock / io-pkt</span>
+          <span class="chip">Automotive Ethernet Switch</span>
+          <span class="chip">C / C++</span>
+          <span class="chip">Unit Testing</span>
+          <span class="chip">Device Drivers</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marvell Intern -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div style="display:flex;gap:1rem;align-items:flex-start;flex:1">
+            <div class="company-logo logo-marvell">MVL</div>
+            <div class="company-info">
+              <div class="role-title">Software / Firmware Engineer Intern</div>
+              <div class="company-name">Marvell Technology</div>
+              <div class="role-meta">
+                <span>Jun 2023 – Jun 2024</span>
+                <span class="sep">·</span>
+                <span>1 yr 1 mo · Internship · On-site</span>
+              </div>
+            </div>
+          </div>
+          <span class="role-badge badge-past">Internship</span>
+        </div>
+        <p class="role-desc">
+          Internship within the driver development team at Marvell. Developed hands-on experience with device driver development and Automotive SPICE (ASPICE) processes for embedded automotive systems.
+        </p>
+        <div class="skill-chips">
+          <span class="chip accent">Device Drivers</span>
+          <span class="chip">Automotive SPICE (ASPICE)</span>
+          <span class="chip">Embedded C</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Techiesms -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div style="display:flex;gap:1rem;align-items:flex-start;flex:1">
+            <div class="company-logo logo-techiesms">TMS</div>
+            <div class="company-info">
+              <div class="role-title">Hardware Design Engineer (IoT)</div>
+              <div class="company-name">Techiesms</div>
+              <div class="role-meta">
+                <span>May 2022 – Aug 2022</span>
+                <span class="sep">·</span>
+                <span>4 mos · Full-time · Ahmedabad, India</span>
+              </div>
+            </div>
+          </div>
+          <span class="role-badge badge-past">IoT</span>
+        </div>
+        <p class="role-desc">
+          Worked on IoT products for home automation using ESPHome. Contributed as a PCB designer, designing 2-layer PCBs for IoT projects including a universal TTL programmer. Gained deep hands-on experience with ESP32 microcontrollers and PCB fabrication workflows.
+        </p>
+        <div class="skill-chips">
+          <span class="chip">ESP32 / ESPHome</span>
+          <span class="chip">PCB Design (2-layer)</span>
+          <span class="chip">IoT / Home Automation</span>
+          <span class="chip">TTL Programmer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- GTU -->
+    <div class="timeline-item reveal">
+      <div class="timeline-dot"></div>
+      <div class="timeline-card">
+        <div class="timeline-header">
+          <div style="display:flex;gap:1rem;align-items:flex-start;flex:1">
+            <div class="company-logo logo-gtu">GTU</div>
+            <div class="company-info">
+              <div class="role-title">Technical Team Member</div>
+              <div class="company-name">GTU Robotics Club</div>
+              <div class="role-meta">
+                <span>Jul 2019 – Jan 2020</span>
+                <span class="sep">·</span>
+                <span>7 mos · Part-time · Ahmedabad, India</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="role-desc">
+          Technical contributor to the GTU Robotics Club, involved in building and programming robots. Developed foundational skills in embedded systems, microcontroller programming, and mechatronics.
+        </p>
+        <div class="skill-chips">
+          <span class="chip">Robotics</span>
+          <span class="chip">Embedded Systems</span>
+          <span class="chip">Microcontrollers</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ── SKILLS ── -->
+<section id="skills">
+  <div class="reveal">
+    <p class="section-label">// 03 — Technical Skills</p>
+    <h2 class="section-title">Tools, languages,<br>and platforms.</h2>
+    <div class="divider"></div>
+    <p class="section-sub">Skills validated through real-world projects and LinkedIn assessments. Verified badges indicate LinkedIn Skill Assessment passes.</p>
+  </div>
+  <div class="skills-layout" style="margin-top:3rem;">
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Core Languages</div>
+      <div class="skill-grid">
+        <span class="skill-pill verified">C</span>
+        <span class="skill-pill verified">C++</span>
+        <span class="skill-pill verified">Python</span>
+        <span class="skill-pill">Embedded C</span>
+        <span class="skill-pill">Shell / Bash</span>
+      </div>
+      <p class="linkedin-note">✓ = LinkedIn Skill Assessment Passed</p>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Operating Systems & RTOS</div>
+      <div class="skill-grid">
+        <span class="skill-pill verified">Linux</span>
+        <span class="skill-pill">QNX</span>
+        <span class="skill-pill">FreeRTOS</span>
+        <span class="skill-pill">RTOS (General)</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Networking & Protocols</div>
+      <div class="skill-grid">
+        <span class="skill-pill">Ethernet Drivers</span>
+        <span class="skill-pill">lwIP Stack</span>
+        <span class="skill-pill">PTP / IEEE 1588</span>
+        <span class="skill-pill">ARP / I2C</span>
+        <span class="skill-pill">QNX io-sock</span>
+        <span class="skill-pill">QNX io-pkt</span>
+        <span class="skill-pill">Automotive Ethernet</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Automotive & Standards</div>
+      <div class="skill-grid">
+        <span class="skill-pill">Automotive SPICE (ASPICE)</span>
+        <span class="skill-pill">SDK Development</span>
+        <span class="skill-pill">Embedded Software</span>
+        <span class="skill-pill">Device Drivers</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Testing & Tooling</div>
+      <div class="skill-grid">
+        <span class="skill-pill">Unit Testing</span>
+        <span class="skill-pill">Test Automation</span>
+        <span class="skill-pill">SDK Build Setup</span>
+        <span class="skill-pill">GDB / Debugging</span>
+      </div>
+    </div>
+    <div class="skill-category reveal">
+      <div class="skill-cat-title">Hardware & IoT</div>
+      <div class="skill-grid">
+        <span class="skill-pill">ESP32 Microcontrollers</span>
+        <span class="skill-pill">PCB Design</span>
+        <span class="skill-pill">ESPHome</span>
+        <span class="skill-pill">IoT Systems</span>
+        <span class="skill-pill">Robotics</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EDUCATION ── -->
+<section id="education">
+  <div class="reveal">
+    <p class="section-label">// 04 — Education & Certifications</p>
+    <h2 class="section-title">Academic foundation.</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="edu-grid" style="margin-top:3rem;">
+    <div class="edu-card reveal">
+      <div class="edu-degree">Master of Technology (M.Tech)</div>
+      <div class="edu-field">Embedded Systems</div>
+      <div class="edu-school">Malaviya National Institute of Technology (MNIT), Jaipur</div>
+      <div class="edu-year">Jul 2022 – Jul 2024</div>
+    </div>
+    <div class="edu-card reveal">
+      <div class="edu-degree">Bachelor of Engineering (B.E.)</div>
+      <div class="edu-field">Electronics & Communication Engineering</div>
+      <div class="edu-school">Government Engineering College (GEC), Gandhinagar</div>
+      <div class="edu-year">2017 – 2021</div>
+    </div>
+  </div>
+
+  <div class="cert-grid">
+    <div class="cert-card reveal">
+      <div class="cert-name">Cloud & Cybersecurity Essentials</div>
+      <div class="cert-issuer">Gujarat University</div>
+      <div class="cert-year">Issued Jan 2018 · ID: 201819500015</div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-name">Python Programming</div>
+      <div class="cert-issuer">University of Michigan (Coursera)</div>
+      <div class="cert-year">Issued Jun 2020</div>
+    </div>
+    <div class="cert-card reveal">
+      <div class="cert-name">LinkedIn Skill Assessment</div>
+      <div class="cert-issuer">Verified: C, C++, Python, Linux</div>
+      <div class="cert-year">Multiple assessments passed</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTACT ── -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-label">// 05 — Contact</p>
+    <h2 class="section-title">Let's build something<br>together.</h2>
+    <div class="divider"></div>
+    <p class="section-sub">Open to senior firmware/embedded roles, automotive projects, and consulting discussions. Always happy to connect with engineers working on interesting problems.</p>
+  </div>
+  <div class="contact-grid">
+    <div class="contact-links reveal">
+      <a href="mailto:arunsuthar98@gmail.com" class="contact-link">
+        <div class="contact-link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <div class="contact-link-label">Email</div>
+          <div class="contact-link-val">arunsuthar98@gmail.com</div>
+        </div>
+      </a>
+      <a href="https://linkedin.com/in/arunsuthar98" target="_blank" class="contact-link">
+        <div class="contact-link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div>
+          <div class="contact-link-label">LinkedIn</div>
+          <div class="contact-link-val">linkedin.com/in/arunsuthar98</div>
+        </div>
+      </a>
+      <a href="https://github.com/arunsuthar98" target="_blank" class="contact-link">
+        <div class="contact-link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        </div>
+        <div>
+          <div class="contact-link-label">GitHub</div>
+          <div class="contact-link-val">github.com/arunsuthar98</div>
+        </div>
+      </a>
+      <a href="https://www.hackster.io/arunsuthar98" target="_blank" class="contact-link">
+        <div class="contact-link-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div>
+          <div class="contact-link-label">Hackster.io</div>
+          <div class="contact-link-val">hackster.io/arunsuthar98</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="contact-form-wrap reveal">
+      <div class="form-title">Send a message</div>
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="your@email.com" />
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="What's on your mind?"></textarea>
+      </div>
+      <button class="btn-form" onclick="handleFormSubmit(this)">Send Message →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <p>© 2025 Arun Suthar. All rights reserved.</p>
+  <span class="footer-mono">Senior Firmware Engineer · Bengaluru, India</span>
+</footer>
+
+<script>
+  /* ── CURSOR ── */
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx+'px'; cursor.style.top = my+'px'; });
+  function animRing() { rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12; ring.style.left = rx+'px'; ring.style.top = ry+'px'; requestAnimationFrame(animRing); }
+  animRing();
+  document.querySelectorAll('a,button,.timeline-card,.edu-card,.cert-card,.skill-pill,.contact-link').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.width='14px'; cursor.style.height='14px'; ring.style.width='52px'; ring.style.height='52px'; ring.style.opacity='0.25'; });
+    el.addEventListener('mouseleave', () => { cursor.style.width='8px'; cursor.style.height='8px'; ring.style.width='36px'; ring.style.height='36px'; ring.style.opacity='0.5'; });
+  });
+
+  /* ── NAV SCROLL ── */
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  /* ── SCROLL REVEAL ── */
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.08 });
+  revealEls.forEach(el => observer.observe(el));
+
+  /* ── STAGGERED REVEALS ── */
+  document.querySelectorAll('.timeline-item.reveal, .skill-category.reveal, .edu-card.reveal, .cert-card.reveal').forEach((el, i) => {
+    el.style.transitionDelay = `${(i % 4) * 80}ms`;
+  });
+
+  /* ── FORM ── */
+  function handleFormSubmit(btn) {
+    const inputs = btn.closest('.contact-form-wrap').querySelectorAll('input, textarea');
+    let valid = true;
+    inputs.forEach(inp => { if (!inp.value.trim()) { inp.style.borderColor='rgba(255,80,80,0.5)'; valid=false; } else { inp.style.borderColor=''; } });
+    if (!valid) return;
+    btn.textContent = 'Message Sent ✓';
+    btn.style.background = '#007a7a';
+    btn.disabled = true;
+    inputs.forEach(inp => inp.value = '');
+    setTimeout(() => { btn.textContent = 'Send Message →'; btn.style.background=''; btn.disabled=false; }, 3000);
+  }
+
+  /* ── ACTIVE NAV LINK ── */
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 100) current = sec.id; });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
+    });
+  });
+</script>
 </body>
 </html>
