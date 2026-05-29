@@ -1,4 +1,4 @@
-// Single source of truth for all portfolio content.
+// Single source of truth for portfolio content.
 
 export const profile = {
   name: 'Arun Suthar',
@@ -8,7 +8,7 @@ export const profile = {
   email: 'arunsuthar98@gmail.com',
   tagline: 'Building firmware that drives the automotive future',
   blurb:
-    'Senior Firmware Engineer specializing in automotive Ethernet switches, embedded networking, and real-time systems. I build the low-level software that connects modern vehicles — from silicon bring-up to production-grade drivers.',
+    'Firmware Engineer specializing in driver development, HAL, protocol support software, test infrastructure, and embedded applications for automotive Ethernet platforms.',
   socials: {
     github: 'https://github.com/arunsuthar98',
     linkedin: 'https://www.linkedin.com/in/arunsuthar98/',
@@ -20,7 +20,7 @@ export const profile = {
     { value: '3+', label: 'Years Experience' },
     { value: '2', label: 'Semiconductor Cos' },
     { value: 'M.Tech', label: 'VLSI · MNIT Jaipur' },
-    { value: '6+', label: 'IoT Projects Published' },
+    { value: '6+', label: 'IoT Projects' },
   ],
 };
 
@@ -54,112 +54,128 @@ export const profiles = [
 export const experience = [
   {
     company: 'Infineon Technologies',
-    logo: '/logos/infineon.svg',
+    logo: '/logos/infineon.png',
     role: 'Senior Firmware Engineer',
     period: '2024 — Present',
     location: 'Bengaluru, India',
     color: '#0072CE',
     summary:
-      'Working on the firmware of automotive Ethernet switches — the core networking silicon that connects ECUs in next-gen vehicles.',
+      'Firmware development for automotive Ethernet switch — writing drivers, HAL, protocol support, test infrastructure, and applications on multi-core embedded platforms.',
     responsibilities: [
       'eHSM (embedded Hardware Security Module) firmware for automotive Ethernet switch',
       'Ethernet driver development and throughput optimization',
-      'PCI drivers for inter-core communication',
-      'PTP / IEEE 1588 drivers for time synchronization',
-      'Network driver & MCAL development',
-      'UML diagrams & system design for functional testing',
-      'ASPICE process-compliant development',
+      'PTP / IEEE 1588 driver for time synchronization',
+      'Network driver & MCAL (Microcontroller Abstraction Layer)',
+      'Firmware profiling and performance optimization',
+      'ASPICE-compliant development process',
       'Cantata unit testing and coverage analysis',
+      'UML diagrams & system design for functional testing',
       'Multi-module build system on ARM R52 and AURIX',
-      'Profiling and performance optimization',
     ],
     stack: ['C', 'ARM R52', 'AURIX', 'ASPICE', 'PTP', 'Cantata', 'UML'],
   },
   {
     company: 'Marvell Semiconductor',
-    logo: '/logos/marvell.svg',
+    logo: '/logos/marvell.png',
     role: 'Firmware Engineer',
     period: '2022 — 2024',
     location: 'Bengaluru, India',
     color: '#CC0000',
     summary:
-      'Built firmware for automotive Ethernet PHY silicon (88Q2xxx family) — from bare-metal drivers to validation tooling.',
+      'Firmware development for automotive Ethernet PHY (88Q2xxx). Built networking tools, contributed to open-source, and developed Linux & QNX drivers.',
     responsibilities: [
-      'Developed iperf application on lwIP TCP/IP stack for embedded network testing',
-      'Open-source contributions to lwIP — bug fixes and zero-copy RX improvements',
+      'Open source contribution: USP (UDP Server Protocol) support on iperf application for lwIP',
+      'PCI driver development on Linux and QNX',
       'Automotive Ethernet PHY firmware (88Q2xxx) — bring-up & validation',
       'Ethernet driver development and throughput benchmarking',
       'Firmware profiling and performance tuning',
       'Hardware bring-up: oscilloscope, logic analyzer, JTAG',
     ],
-    stack: ['C', 'lwIP', 'FreeRTOS', 'ARM Cortex-M', 'Python', 'Make'],
+    stack: ['C', 'lwIP', 'Linux', 'QNX', 'FreeRTOS', 'ARM Cortex-M', 'Python'],
   },
   {
     company: 'Techiesms',
-    logo: null,
+    logo: '/logos/techiesms.png',
     role: 'IoT Developer (Freelance)',
     period: '2020 — 2022',
     location: 'Remote',
     color: '#f9a826',
     summary:
-      'Built production IoT products with ESP32/ESP8266. Published 6+ projects on Hackster.io with schematics & source code.',
+      'Developed production IoT products with ESP32/ESP8266. Published projects on YouTube and Hackster.io with full schematics & source code.',
     responsibilities: [
-      'Production IoT firmware — MQTT, BLE, OTA updates',
-      'Published projects on Hackster.io with full schematics',
+      'All-in-One Home Automation with Fan Dimmer (published on YouTube)',
+      'ESP32Cam / ESP32 Chip / Arduino Pro Mini — Universal TTL Programmer',
+      'Home Automation project for Home Assistant users',
+      'Techiesms Sound Box — ESP32 IoT audio project',
       'PCB design and small-batch manufacturing',
-      'Custom firmware for smart home & industrial sensors',
     ],
-    stack: ['ESP-IDF', 'Arduino', 'MQTT', 'KiCad', 'PCB Design'],
+    stack: ['ESP32', 'ESP-IDF', 'Arduino', 'MQTT', 'KiCad', 'PCB Design'],
+    youtubeProjects: [
+      { title: 'All-in-One Home Automation with Fan Dimmer V2', url: 'https://youtu.be/87QhjQth-pQ' },
+      { title: 'Universal TTL Programmer (ESP32Cam / Arduino Pro Mini)', url: 'https://youtu.be/9j1QwuQz_lI' },
+      { title: 'Home Automation for Home Assistant Users', url: 'https://youtu.be/ZR2J6sx5EtY' },
+      { title: 'Techiesms Sound Box — ESP32 IoT Project', url: 'https://youtu.be/vWUqUVTP6H8' },
+    ],
   },
   {
     company: 'GTU Robotics Club',
-    logo: null,
-    role: 'Embedded Lead',
+    logo: '/logos/gtu-robotics.png',
+    role: 'Member — Embedded Systems',
     period: '2018 — 2020',
     location: 'Ahmedabad, India',
     color: '#7c5cff',
-    summary: 'Led firmware development for inter-college robotics competitions.',
+    summary: 'Built robots for ABU Robocon 2020. Worked on motor control, sensor fusion, and embedded firmware.',
     responsibilities: [
+      'Built multiple robots for ABU Robocon 2020 competition',
       'Motor control, sensor fusion, line-follower & maze-solver bots',
-      'Firmware for STM32 and AVR platforms',
+      'Firmware development on STM32 and AVR platforms',
     ],
-    stack: ['STM32', 'AVR', 'C', 'Motor Control'],
+    stack: ['STM32', 'AVR', 'C', 'Motor Control', 'Robocon'],
   },
 ];
 
 export const projects = [
   {
     id: 'ehsm',
-    title: 'eHSM Firmware — Automotive Ethernet Switch',
+    title: 'eHSM — Automotive Ethernet Switch',
     summary:
-      'Firmware for the embedded Hardware Security Module on an automotive Ethernet switch. Manages secure boot, key storage, and crypto operations for the switch silicon.',
+      'Firmware for the embedded Hardware Security Module on an automotive Ethernet switch. Manages secure boot, key storage, and crypto operations at the silicon level.',
     stack: ['C', 'ARM R52', 'ASPICE', 'Cantata'],
     tag: 'AUTOMOTIVE · SECURITY',
   },
   {
     id: 'iperf-lwip',
-    title: 'iperf Application on lwIP',
+    title: 'iperf on lwIP — Open Source Contribution',
     summary:
-      'Built an iperf-compatible network performance measurement tool running on the lightweight lwIP TCP/IP stack. Used for validating automotive Ethernet throughput on embedded targets.',
-    stack: ['C', 'lwIP', 'FreeRTOS', 'Automotive Ethernet'],
-    tag: 'NETWORKING · TOOLING',
-  },
-  {
-    id: 'lwip-contrib',
-    title: 'lwIP Open Source Contributions',
-    summary:
-      'Contributed bug fixes and zero-copy receive path improvements to the lwIP open-source TCP/IP stack used across millions of embedded devices.',
-    stack: ['C', 'lwIP', 'Git', 'Open Source'],
-    tag: 'OPEN SOURCE',
+      'Contributed USP (UDP Server Protocol) support to the iperf application running on lwIP. Used for embedded automotive Ethernet throughput validation.',
+    stack: ['C', 'lwIP', 'iperf', 'Open Source'],
+    tag: 'OPEN SOURCE · NETWORKING',
     link: 'https://savannah.nongnu.org/projects/lwip/',
   },
   {
-    id: 'eth-drivers',
-    title: 'Ethernet & PCI Drivers',
+    id: 'pci-drivers',
+    title: 'PCI Drivers — Linux & QNX',
     summary:
-      'Developed high-performance Ethernet and PCI drivers for automotive platforms. Focus on throughput optimization, profiling, and multi-module build systems across ARM R52 and AURIX cores.',
-    stack: ['C', 'ARM R52', 'AURIX', 'PCI', 'Network Stack'],
-    tag: 'DRIVERS · FIRMWARE',
+      'Developed PCI drivers for inter-core communication on Linux and QNX operating systems. Enables high-speed data transfer between host and embedded controllers.',
+    stack: ['C', 'Linux', 'QNX', 'PCI', 'Device Drivers'],
+    tag: 'DRIVERS · SYSTEMS',
+  },
+  {
+    id: 'home-automation',
+    title: 'All-in-One Home Automation',
+    summary:
+      'Complete home automation system with fan dimmer, relay control, and Home Assistant integration. Built on ESP32 with custom PCB, published on YouTube with full source.',
+    stack: ['ESP32', 'MQTT', 'Home Assistant', 'PCB', 'KiCad'],
+    tag: 'IOT · PUBLISHED',
+    link: 'https://youtu.be/87QhjQth-pQ',
+  },
+  {
+    id: 'robocon',
+    title: 'ABU Robocon 2020 — Robot Firmware',
+    summary:
+      'Firmware for competition robots at ABU Robocon 2020. Motor control, sensor fusion, navigation algorithms on STM32/AVR.',
+    stack: ['STM32', 'AVR', 'C', 'Motor Control'],
+    tag: 'ROBOTICS',
   },
 ];
 
@@ -169,35 +185,37 @@ export const skills = [
     items: ['C', 'C++', 'Python', 'Shell Scripting', 'ARM Assembly'],
   },
   {
-    group: 'Platforms & RTOS',
-    items: ['FreeRTOS', 'QNX', 'Linux', 'AUTOSAR', 'Bare-metal'],
+    group: 'Platforms & OS',
+    items: ['Linux', 'QNX', 'FreeRTOS', 'AUTOSAR', 'Bare-metal'],
+  },
+  {
+    group: 'Firmware Work',
+    items: ['Driver Development', 'HAL', 'Protocol Software', 'Test Infrastructure', 'Applications'],
   },
   {
     group: 'Networking',
-    items: ['Automotive Ethernet', 'lwIP', 'PTP / IEEE 1588', 'TCP/IP', 'TSN'],
+    items: ['Automotive Ethernet', 'lwIP', 'PTP / IEEE 1588', 'TCP/IP', 'iperf'],
   },
   {
     group: 'Silicon & Hardware',
     items: ['ARM Cortex-R52', 'AURIX', 'Marvell 88Q2xxx', 'ESP32', 'STM32'],
   },
   {
-    group: 'Tooling',
-    items: ['GDB', 'JTAG / Lauterbach', 'Oscilloscope', 'Cantata', 'Git', 'CMake / Make'],
-  },
-  {
-    group: 'Process & Methodology',
-    items: ['ASPICE', 'MISRA-C', 'UML Design', 'Functional Testing', 'Unit Testing', 'Code Review'],
+    group: 'Tooling & Process',
+    items: ['GDB', 'JTAG / Lauterbach', 'Oscilloscope', 'Cantata', 'ASPICE', 'MISRA-C', 'Git', 'CMake'],
   },
 ];
 
 export const education = [
   {
     school: 'MNIT Jaipur',
+    logo: '/logos/mnit.png',
     degree: 'M.Tech — VLSI Design',
     period: '2020 — 2022',
   },
   {
-    school: 'Gujarat Technological University',
+    school: 'GEC Gandhinagar (GTU)',
+    logo: '/logos/gec-gandhinagar.avif',
     degree: 'B.E. — Electronics & Communication',
     period: '2016 — 2020',
   },

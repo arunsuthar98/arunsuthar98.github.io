@@ -35,6 +35,13 @@ import { experience } from '../data/site';
         <div class="exp-stack">
           {e.stack.map((s) => <span class="chip">{s}</span>)}
         </div>
+        {e.youtubeProjects && (
+          <div class="exp-youtube">
+            {e.youtubeProjects.map((yt) => (
+              <a href={yt.url} target="_blank" rel="noopener" class="yt-link">{yt.title}</a>
+            ))}
+          </div>
+        )}
       </article>
     ))}
   </div>

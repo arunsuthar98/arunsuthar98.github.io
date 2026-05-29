@@ -10,9 +10,14 @@ import { education } from '../data/site';
   <div class="edu-grid">
     {education.map((e) => (
       <div class="edu-card reveal">
-        <div class="edu-deg">{e.degree}</div>
-        <div class="edu-school">{e.school}</div>
-        <div class="edu-period">{e.period}</div>
+        {e.logo && (
+          <img class="edu-logo" src={e.logo} alt={e.school} width="48" height="48" loading="lazy" />
+        )}
+        <div class="edu-info">
+          <div class="edu-deg">{e.degree}</div>
+          <div class="edu-school">{e.school}</div>
+          <div class="edu-period">{e.period}</div>
+        </div>
       </div>
     ))}
   </div>

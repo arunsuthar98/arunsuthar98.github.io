@@ -2,10 +2,11 @@
 import { profile } from '../data/site';
 ---
 <section id="hero" class="hero">
+  <div class="pcb-bg" aria-hidden="true"></div>
   <div class="container hero-inner">
     <div class="hero-content">
       <span class="hero-badge">
-        <span class="dot" aria-hidden="true"></span>
+        <span class="pulse" aria-hidden="true"></span>
         Open to opportunities
       </span>
       <h1 class="hero-name">{profile.name}</h1>
@@ -35,7 +36,8 @@ import { profile } from '../data/site';
     </div>
 
     <div class="hero-photo-wrap">
-      <img class="hero-photo" src="/profile.jpg" alt={profile.name} width="280" height="280" loading="eager" />
+      <div class="hero-photo-glow" aria-hidden="true"></div>
+      <img class="hero-photo" src="/profile.jpg" alt={profile.name} width="240" height="240" loading="eager" />
     </div>
   </div>
 </section>
