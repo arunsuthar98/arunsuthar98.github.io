@@ -37,7 +37,7 @@ function mountParticles() {
   const ctx = canvas.getContext('2d')!;
   let w = 0, h = 0;
   const particles: { x: number; y: number; vx: number; vy: number; r: number; o: number }[] = [];
-  const count = Math.min(60, Math.floor(window.innerWidth / 20));
+  const count = Math.min(50, Math.floor(window.innerWidth / 25));
 
   function resize() {
     w = canvas!.width = window.innerWidth;
@@ -50,17 +50,39 @@ function mountParticles() {
     particles.push({
       x: Math.random() * w,
       y: Math.random() * h,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      r: Math.random() * 1.5 + 0.5,
-      o: Math.random() * 0.5 + 0.2,
+      vx: (Math.random() - 0.5) * 0.3,
+      vy: (Math.random() - 0.5) * 0.3,
+      r: Math.random() * 1.5 + 0.8,
+      o: Math.random() * 0.4 + 0.2,
     });
   }
 
   function draw() {
     ctx.clearRect(0, 0, w, h);
-    const accent = getComputedStyle(document.documentElement).getPropertyValue('--accent').trim() || '#00d4aa';
+    const style = getComputedStyle(document.documentElement);
+    const traceColor = style.getPropertyValue('--trace').trim() || '#00e676';
     
+    // Draw connections (PCB trace style — only horizontal/vertical lines)
+    ctx.strokeStyle = traceColor;
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = Math.abs(particles[i].x - particles[j].x);
+        const dy = Math.abs(particles[i].y - particles[j].y);
+        const dist = dx + dy; // Manhattan distance for PCB-like routing
+        if (dist < 150) {
+          ctx.globalAlpha = (1 - dist / 150) * 0.08;
+          ctx.beginPath();
+          // Route like PCB traces: horizontal then vertical
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Draw particles as solder pads
     for (const p of particles) {
       p.x += p.vx;
       p.y += p.vy;
@@ -69,28 +91,20 @@ function mountParticles() {
       if (p.y < 0) p.y = h;
       if (p.y > h) p.y = 0;
 
+      ctx.globalAlpha = p.o;
+      ctx.fillStyle = traceColor;
       ctx.beginPath();
       ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = accent;
-      ctx.globalAlpha = p.o;
       ctx.fill();
-    }
-
-    // Draw lines between nearby particles
-    ctx.globalAlpha = 0.06;
-    ctx.strokeStyle = accent;
-    ctx.lineWidth = 0.5;
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = dx * dx + dy * dy;
-        if (dist < 15000) {
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.stroke();
-        }
+      
+      // Glow ring around larger particles
+      if (p.r > 1.5) {
+        ctx.globalAlpha = p.o * 0.3;
+        ctx.strokeStyle = traceColor;
+        ctx.lineWidth = 0.5;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r + 3, 0, Math.PI * 2);
+        ctx.stroke();
       }
     }
     ctx.globalAlpha = 1;
