@@ -1,12 +1,12 @@
 ---
-import { profile } from '../data/site';
+import { profile, profiles } from '../data/site';
 ---
 <section id="contact" class="container">
   <div class="reveal">
-    <span class="eyebrow">// 06 — contact</span>
-    <h2 class="section-title">Let's build<br>something low-latency.</h2>
+    <span class="eyebrow">Contact</span>
+    <h2 class="section-title">Let's connect</h2>
     <p class="section-sub">
-      Drop a message about an opportunity, a firmware collab, or a TSN question. I read everything.
+      Interested in firmware development, automotive tech, or just want to chat? Drop me a message.
     </p>
   </div>
 
@@ -16,34 +16,43 @@ import { profile } from '../data/site';
       action={`https://formsubmit.co/${profile.email}`}
       method="POST"
     >
-      <input type="hidden" name="_subject" value="New message from portfolio" />
+      <input type="hidden" name="_subject" value="Portfolio inquiry" />
       <input type="hidden" name="_captcha" value="false" />
       <input type="hidden" name="_template" value="table" />
 
       <div>
-        <label for="name">name</label>
-        <input id="name" name="name" type="text" required autocomplete="name" />
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" required autocomplete="name" placeholder="John Doe" />
       </div>
       <div>
-        <label for="email">email</label>
-        <input id="email" name="email" type="email" required autocomplete="email" />
+        <label for="email">Your email</label>
+        <input id="email" name="email" type="email" required autocomplete="email" placeholder="you@company.com" />
       </div>
       <div>
-        <label for="msg">message</label>
-        <textarea id="msg" name="message" required></textarea>
+        <label for="msg">Message</label>
+        <textarea id="msg" name="message" required placeholder="Hi Arun, I'd like to discuss..."></textarea>
       </div>
       <button type="submit" class="btn btn-primary" data-magnet>
-        send transmission <span class="arrow">→</span>
+        Send message <span class="arrow">→</span>
       </button>
     </form>
 
-    <aside class="contact-direct reveal">
-      <h3>Or skip the form.</h3>
-      <p>I'm easiest to reach over email or LinkedIn DMs.</p>
-      <div class="contact-quick">
-        <a class="btn" href={profile.socials.email}>✉ {profile.email}</a>
-        <a class="btn" href={profile.socials.linkedin} target="_blank" rel="noopener">in/ {profile.handle}</a>
-        <a class="btn" href={profile.socials.github} target="_blank" rel="noopener">gh/ {profile.handle}</a>
+    <aside class="contact-aside reveal">
+      <h3>Or reach out directly</h3>
+      <p>I'm most responsive on email and LinkedIn. Happy to connect!</p>
+      <div class="contact-links">
+        <a class="contact-link" href={profile.socials.email}>
+          <span>✉</span> {profile.email}
+        </a>
+        <a class="contact-link" href={profile.socials.linkedin} target="_blank" rel="noopener">
+          <img src="/logos/linkedin.svg" alt="LinkedIn" /> LinkedIn
+        </a>
+        <a class="contact-link" href={profile.socials.github} target="_blank" rel="noopener">
+          <img src="/logos/github.svg" alt="GitHub" /> GitHub
+        </a>
+        <a class="contact-link" href={profile.socials.leetcode} target="_blank" rel="noopener">
+          <img src="/logos/leetcode.svg" alt="LeetCode" /> LeetCode
+        </a>
       </div>
     </aside>
   </div>
@@ -51,10 +60,11 @@ import { profile } from '../data/site';
 
 <footer class="footer">
   <div class="container footer-row">
-    <span>© <span data-year>2026</span> {profile.name} · built with Astro · deployed on GitHub Pages</span>
+    <span>© <span data-year>2026</span> {profile.name}</span>
     <span>
-      <a href="https://github.com/arunsuthar98/arunsuthar98.github.io" target="_blank" rel="noopener">source ↗</a>
-      · press <kbd style="font:inherit">⌘K</kbd> anywhere
+      <a href={profile.socials.github} target="_blank" rel="noopener">GitHub</a> ·
+      <a href={profile.socials.linkedin} target="_blank" rel="noopener">LinkedIn</a> ·
+      <a href={profile.socials.leetcode} target="_blank" rel="noopener">LeetCode</a>
     </span>
   </div>
 </footer>

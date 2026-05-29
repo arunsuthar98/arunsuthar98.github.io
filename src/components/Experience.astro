@@ -3,31 +3,39 @@ import { experience } from '../data/site';
 ---
 <section id="experience" class="container">
   <div class="reveal">
-    <span class="eyebrow">// 02 — experience</span>
-    <h2 class="section-title">Where I've shipped<br>things that matter.</h2>
+    <span class="eyebrow">Experience</span>
+    <h2 class="section-title">Where I've worked</h2>
     <p class="section-sub">
-      3+ years across two industry-leading semiconductor companies — firmware that goes into vehicles, validated under ASPICE, reviewed by MISRA tooling, and tested on real silicon.
+      3+ years across two semiconductor leaders — building firmware that ships in vehicles.
     </p>
   </div>
 
-  <ol class="timeline">
+  <div class="timeline">
     {experience.map((e) => (
-      <li class="tl-item reveal">
-        <span class="tl-dot" style={`border-color:${e.color};box-shadow:0 0 18px ${e.color}55`}></span>
-        <article class="tl-card">
-          <div class="tl-head">
-            <h3 class="tl-company">{e.company}</h3>
-            <span class="tl-meta">{e.period} · {e.location}</span>
+      <article class="exp-card reveal">
+        <div class="exp-header">
+          {e.logo && (
+            <div class="exp-logo">
+              <img src={e.logo} alt={e.company} />
+            </div>
+          )}
+          <div class="exp-info">
+            <h3 class="exp-company">{e.company}</h3>
+            <div class="exp-role">{e.role}</div>
           </div>
-          <div class="tl-role">{e.role}</div>
-          <ul class="tl-bullets">
-            {e.bullets.map((b) => <li>{b}</li>)}
-          </ul>
-          <div class="tl-stack">
-            {e.stack.map((s) => <span class="chip">{s}</span>)}
+          <div class="exp-meta">
+            <div>{e.period}</div>
+            <div>{e.location}</div>
           </div>
-        </article>
-      </li>
+        </div>
+        <p class="exp-summary">{e.summary}</p>
+        <ul class="exp-list">
+          {e.responsibilities.map((r) => <li>{r}</li>)}
+        </ul>
+        <div class="exp-stack">
+          {e.stack.map((s) => <span class="chip">{s}</span>)}
+        </div>
+      </article>
     ))}
-  </ol>
+  </div>
 </section>

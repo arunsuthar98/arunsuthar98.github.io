@@ -1,5 +1,4 @@
-// Single source of truth for portfolio content.
-// Edit values here; components consume this file.
+// Single source of truth for all portfolio content.
 
 export const profile = {
   name: 'Arun Suthar',
@@ -7,185 +6,199 @@ export const profile = {
   title: 'Senior Firmware Engineer',
   location: 'Bengaluru, India',
   email: 'arunsuthar98@gmail.com',
-  tagline: 'Engineer at the edge of hardware & software',
+  tagline: 'Building firmware that drives the automotive future',
   blurb:
-    'I build firmware that ships in cars. Linux drivers, real-time systems, automotive Ethernet stacks, and the silicon-software boundary where bits become voltage.',
+    'Senior Firmware Engineer specializing in automotive Ethernet switches, embedded networking, and real-time systems. I build the low-level software that connects modern vehicles — from silicon bring-up to production-grade drivers.',
   socials: {
     github: 'https://github.com/arunsuthar98',
     linkedin: 'https://www.linkedin.com/in/arunsuthar98/',
     hackster: 'https://www.hackster.io/arunsuthar98',
+    leetcode: 'https://leetcode.com/u/arunsuthar98/',
     email: 'mailto:arunsuthar98@gmail.com',
   },
   stats: [
-    { value: '3+', label: 'Years exp.' },
-    { value: '2',  label: 'Semi cos.' },
-    { value: 'M.Tech', label: 'MNIT Jaipur' },
-    { value: '6+', label: 'IoT projects' },
+    { value: '3+', label: 'Years Experience' },
+    { value: '2', label: 'Semiconductor Cos' },
+    { value: 'M.Tech', label: 'VLSI · MNIT Jaipur' },
+    { value: '6+', label: 'IoT Projects Published' },
   ],
 };
+
+export const profiles = [
+  {
+    name: 'GitHub',
+    url: 'https://github.com/arunsuthar98',
+    logo: '/logos/github.svg',
+    description: 'Open source & personal projects',
+  },
+  {
+    name: 'LeetCode',
+    url: 'https://leetcode.com/u/arunsuthar98/',
+    logo: '/logos/leetcode.svg',
+    description: 'DSA & problem solving',
+  },
+  {
+    name: 'Hackster.io',
+    url: 'https://www.hackster.io/arunsuthar98',
+    logo: '/logos/hackster.svg',
+    description: 'IoT & embedded projects',
+  },
+  {
+    name: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/arunsuthar98/',
+    logo: '/logos/linkedin.svg',
+    description: 'Professional network',
+  },
+];
 
 export const experience = [
   {
     company: 'Infineon Technologies',
+    logo: '/logos/infineon.svg',
     role: 'Senior Firmware Engineer',
     period: '2024 — Present',
-    location: 'Bengaluru, IN',
-    color: '#00b3a4',
-    bullets: [
-      'eHSM firmware for AURIX TC3xx — secure boot, key management, crypto primitives',
-      'Automotive Ethernet firmware on QNX (io-sock), Linux & FreeRTOS',
-      'TSN / IEEE 1588 PTP integration for time-critical networking',
-      'ASPICE-compliant development, MISRA-C, static analysis',
+    location: 'Bengaluru, India',
+    color: '#0072CE',
+    summary:
+      'Working on the firmware of automotive Ethernet switches — the core networking silicon that connects ECUs in next-gen vehicles.',
+    responsibilities: [
+      'eHSM (embedded Hardware Security Module) firmware for automotive Ethernet switch',
+      'Ethernet driver development and throughput optimization',
+      'PCI drivers for inter-core communication',
+      'PTP / IEEE 1588 drivers for time synchronization',
+      'Network driver & MCAL development',
+      'UML diagrams & system design for functional testing',
+      'ASPICE process-compliant development',
+      'Cantata unit testing and coverage analysis',
+      'Multi-module build system on ARM R52 and AURIX',
+      'Profiling and performance optimization',
     ],
-    stack: ['C', 'C++', 'QNX', 'Linux Drivers', 'FreeRTOS', 'AUTOSAR'],
+    stack: ['C', 'ARM R52', 'AURIX', 'ASPICE', 'PTP', 'Cantata', 'UML'],
   },
   {
     company: 'Marvell Semiconductor',
+    logo: '/logos/marvell.svg',
     role: 'Firmware Engineer',
     period: '2022 — 2024',
-    location: 'Bengaluru, IN',
-    color: '#e63946',
-    bullets: [
-      'Automotive Ethernet PHY firmware (88Q2xxx family) — bring-up & validation',
-      'lwIP TCP/IP stack integration & open-source upstream contributions',
-      'iperf3 port for embedded automotive test harnesses',
-      'Hardware bring-up: oscilloscope, logic analyzer, JTAG, ICE',
+    location: 'Bengaluru, India',
+    color: '#CC0000',
+    summary:
+      'Built firmware for automotive Ethernet PHY silicon (88Q2xxx family) — from bare-metal drivers to validation tooling.',
+    responsibilities: [
+      'Developed iperf application on lwIP TCP/IP stack for embedded network testing',
+      'Open-source contributions to lwIP — bug fixes and zero-copy RX improvements',
+      'Automotive Ethernet PHY firmware (88Q2xxx) — bring-up & validation',
+      'Ethernet driver development and throughput benchmarking',
+      'Firmware profiling and performance tuning',
+      'Hardware bring-up: oscilloscope, logic analyzer, JTAG',
     ],
-    stack: ['C', 'Python', 'lwIP', 'iperf3', 'ARM Cortex-M', 'Make'],
+    stack: ['C', 'lwIP', 'FreeRTOS', 'ARM Cortex-M', 'Python', 'Make'],
   },
   {
     company: 'Techiesms',
+    logo: null,
     role: 'IoT Developer (Freelance)',
     period: '2020 — 2022',
     location: 'Remote',
     color: '#f9a826',
-    bullets: [
-      'Production IoT firmware on ESP32 / ESP8266 — MQTT, BLE, OTA',
-      '6+ published projects on Hackster.io with full schematics & code',
-      'PCB design and small-batch manufacturing workflow',
+    summary:
+      'Built production IoT products with ESP32/ESP8266. Published 6+ projects on Hackster.io with schematics & source code.',
+    responsibilities: [
+      'Production IoT firmware — MQTT, BLE, OTA updates',
+      'Published projects on Hackster.io with full schematics',
+      'PCB design and small-batch manufacturing',
+      'Custom firmware for smart home & industrial sensors',
     ],
-    stack: ['ESP-IDF', 'Arduino', 'MQTT', 'PCB', 'KiCad'],
+    stack: ['ESP-IDF', 'Arduino', 'MQTT', 'KiCad', 'PCB Design'],
   },
   {
     company: 'GTU Robotics Club',
+    logo: null,
     role: 'Embedded Lead',
     period: '2018 — 2020',
-    location: 'Ahmedabad, IN',
+    location: 'Ahmedabad, India',
     color: '#7c5cff',
-    bullets: [
-      'Led firmware for inter-college robotics competitions',
+    summary: 'Led firmware development for inter-college robotics competitions.',
+    responsibilities: [
       'Motor control, sensor fusion, line-follower & maze-solver bots',
+      'Firmware for STM32 and AVR platforms',
     ],
-    stack: ['AVR', 'STM32', 'C'],
+    stack: ['STM32', 'AVR', 'C', 'Motor Control'],
   },
 ];
 
 export const projects = [
   {
     id: 'ehsm',
-    title: 'eHSM — Embedded Hardware Security Module',
-    role: 'Firmware Lead',
-    period: 'Active',
+    title: 'eHSM Firmware — Automotive Ethernet Switch',
     summary:
-      'Firmware for the embedded Hardware Security Module on AURIX TC3xx. Implements secure boot chain, runtime key storage, and HSM-accelerated crypto (AES-GCM, ECDSA, SHA-2) exposed to the host core over IPC.',
-    highlights: [
-      'Secure boot with measured boot chain across BootROM → BL2 → app',
-      'HSM-host IPC layer with zero-copy command queue',
-      'MISRA-C, ASIL-B targets, static analysis gating CI',
-    ],
-    stack: ['C', 'AURIX TC3xx', 'TriCore', 'AUTOSAR Crypto', 'ASIL-B'],
+      'Firmware for the embedded Hardware Security Module on an automotive Ethernet switch. Manages secure boot, key storage, and crypto operations for the switch silicon.',
+    stack: ['C', 'ARM R52', 'ASPICE', 'Cantata'],
     tag: 'AUTOMOTIVE · SECURITY',
   },
   {
-    id: 'iperf',
-    title: 'iperf3 — Automotive Ethernet Port',
-    role: 'Maintainer',
-    period: 'Active',
+    id: 'iperf-lwip',
+    title: 'iperf Application on lwIP',
     summary:
-      'Port and adaptation of iperf3 for embedded automotive Ethernet validation. Runs on QNX (io-sock) and bare-metal lwIP, with PTP-synchronized timestamps for sub-microsecond throughput / jitter measurement on 1000BASE-T1 links.',
-    highlights: [
-      'PTP-synchronized bidirectional UDP / TCP measurement',
-      'QNX io-sock + lwIP RAW API back-ends',
-      'CLI-compatible with upstream iperf3 for CI parity',
-    ],
-    stack: ['C', 'lwIP', 'QNX', 'PTP / IEEE 1588', '1000BASE-T1'],
+      'Built an iperf-compatible network performance measurement tool running on the lightweight lwIP TCP/IP stack. Used for validating automotive Ethernet throughput on embedded targets.',
+    stack: ['C', 'lwIP', 'FreeRTOS', 'Automotive Ethernet'],
     tag: 'NETWORKING · TOOLING',
   },
   {
-    id: 'lwip',
-    title: 'lwIP — Open Source Contributions',
-    role: 'Contributor',
-    period: 'Ongoing',
+    id: 'lwip-contrib',
+    title: 'lwIP Open Source Contributions',
     summary:
-      'Upstream contributions to the lwIP TCP/IP stack — bug fixes, IEEE 1588 hooks, and improvements to the RAW API for zero-copy receive paths on automotive controllers.',
-    highlights: [
-      'Patches reviewed on lwip-devel mailing list',
-      'Zero-copy RX path for memory-constrained MCUs',
-      'Documentation and example clean-ups',
-    ],
-    stack: ['C', 'lwIP', 'Git', 'Mailing-list workflow'],
+      'Contributed bug fixes and zero-copy receive path improvements to the lwIP open-source TCP/IP stack used across millions of embedded devices.',
+    stack: ['C', 'lwIP', 'Git', 'Open Source'],
     tag: 'OPEN SOURCE',
     link: 'https://savannah.nongnu.org/projects/lwip/',
   },
   {
-    id: 'tsn-lab',
-    title: 'TSN Lab — Time-Sensitive Networking Sandbox',
-    role: 'Personal',
-    period: 'Personal',
+    id: 'eth-drivers',
+    title: 'Ethernet & PCI Drivers',
     summary:
-      'A home-lab setup exploring TSN building blocks — 802.1AS gPTP, 802.1Qbv scheduled traffic, frame preemption — using off-the-shelf TSN switches and Linux endpoints. Scripts, captures, and notes are open-sourced.',
-    highlights: [
-      'gPTP daemon configs & sync accuracy measurements',
-      'Qbv gate-control list experiments',
-      'Wireshark dissectors for ST traffic',
-    ],
-    stack: ['Linux', 'gPTP', '802.1Qbv', 'Wireshark', 'Python'],
-    tag: 'PERSONAL · TSN',
+      'Developed high-performance Ethernet and PCI drivers for automotive platforms. Focus on throughput optimization, profiling, and multi-module build systems across ARM R52 and AURIX cores.',
+    stack: ['C', 'ARM R52', 'AURIX', 'PCI', 'Network Stack'],
+    tag: 'DRIVERS · FIRMWARE',
   },
 ];
 
 export const skills = [
   {
     group: 'Languages',
-    items: ['C', 'C++', 'Python', 'Shell', 'Assembly (ARM/TriCore)'],
+    items: ['C', 'C++', 'Python', 'Shell Scripting', 'ARM Assembly'],
   },
   {
-    group: 'Platforms',
-    items: ['Linux', 'QNX', 'FreeRTOS', 'AUTOSAR Classic', 'Bare-metal'],
+    group: 'Platforms & RTOS',
+    items: ['FreeRTOS', 'QNX', 'Linux', 'AUTOSAR', 'Bare-metal'],
   },
   {
     group: 'Networking',
-    items: [
-      'Automotive Ethernet (1000BASE-T1)',
-      'TSN / IEEE 1588',
-      'lwIP',
-      'Sockets / io-sock',
-      'TCP/IP internals',
-    ],
+    items: ['Automotive Ethernet', 'lwIP', 'PTP / IEEE 1588', 'TCP/IP', 'TSN'],
   },
   {
-    group: 'Silicon',
-    items: ['AURIX TC3xx', 'Marvell 88Q2xxx', 'ARM Cortex-M/R/A', 'ESP32', 'STM32'],
+    group: 'Silicon & Hardware',
+    items: ['ARM Cortex-R52', 'AURIX', 'Marvell 88Q2xxx', 'ESP32', 'STM32'],
   },
   {
     group: 'Tooling',
-    items: ['GDB', 'JTAG / Lauterbach', 'Logic Analyzer', 'Oscilloscope', 'Git', 'Make / CMake'],
+    items: ['GDB', 'JTAG / Lauterbach', 'Oscilloscope', 'Cantata', 'Git', 'CMake / Make'],
   },
   {
-    group: 'Process',
-    items: ['ASPICE', 'MISRA-C', 'ISO 26262 (ASIL-B aware)', 'Static analysis', 'Code review'],
+    group: 'Process & Methodology',
+    items: ['ASPICE', 'MISRA-C', 'UML Design', 'Functional Testing', 'Unit Testing', 'Code Review'],
   },
 ];
 
 export const education = [
   {
     school: 'MNIT Jaipur',
-    degree: 'M.Tech, VLSI Design',
+    degree: 'M.Tech — VLSI Design',
     period: '2020 — 2022',
   },
   {
     school: 'Gujarat Technological University',
-    degree: 'B.E., Electronics & Communication',
+    degree: 'B.E. — Electronics & Communication',
     period: '2016 — 2020',
   },
 ];

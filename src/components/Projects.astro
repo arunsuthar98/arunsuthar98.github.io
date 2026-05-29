@@ -3,41 +3,24 @@ import { projects } from '../data/site';
 ---
 <section id="projects" class="container">
   <div class="reveal">
-    <span class="eyebrow">// 03 — projects</span>
-    <h2 class="section-title">Selected work<br>& open-source.</h2>
+    <span class="eyebrow">Projects</span>
+    <h2 class="section-title">What I've built</h2>
     <p class="section-sub">
-      The systems I'm building right now — at work and after hours. Mostly C, mostly real-time, mostly with a logic analyzer on the desk.
+      Key projects I've worked on — from security modules to network tooling and open-source contributions.
     </p>
   </div>
 
   <div class="proj-grid">
     {projects.map((p) => (
-      <article class="proj-card reveal" data-proj data-magnet="0.06">
+      <article class="proj-card reveal" data-spotlight>
         <div class="proj-tag">{p.tag}</div>
         <h3 class="proj-title">{p.title}</h3>
-        <div class="proj-meta">{p.role} · {p.period}</div>
         <p class="proj-summary">{p.summary}</p>
-        <ul class="proj-hl">
-          {p.highlights.map((h) => <li>{h}</li>)}
-        </ul>
         <div class="proj-foot">
           {p.stack.map((s) => <span class="chip">{s}</span>)}
-          {p.link && <a class="social-btn" href={p.link} target="_blank" rel="noopener" style="margin-left:auto">open ↗</a>}
+          {p.link && <a class="btn" href={p.link} target="_blank" rel="noopener" style="margin-left:auto; padding: 0.4rem 0.8rem; font-size: 0.78rem;">View ↗</a>}
         </div>
       </article>
     ))}
   </div>
 </section>
-
-<script is:inline>
-  // Spotlight tracking — pure DOM, lightweight
-  document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('[data-proj]').forEach((card) => {
-      card.addEventListener('mousemove', (e) => {
-        const r = card.getBoundingClientRect();
-        card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-        card.style.setProperty('--my', `${e.clientY - r.top}px`);
-      });
-    });
-  });
-</script>

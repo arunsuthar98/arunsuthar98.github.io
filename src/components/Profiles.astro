@@ -1,0 +1,23 @@
+---
+import { profiles } from '../data/site';
+---
+<section id="profiles" class="container">
+  <div class="reveal">
+    <span class="eyebrow">Profiles</span>
+    <h2 class="section-title">Find me online</h2>
+    <p class="section-sub">Check out my work and activity across platforms.</p>
+  </div>
+
+  <div class="profiles-grid">
+    {profiles.map((p) => (
+      <a href={p.url} target="_blank" rel="noopener" class="profile-card reveal" data-magnet="0.08">
+        <img src={p.logo} alt={p.name} width="36" height="36" loading="lazy" />
+        <div class="info">
+          <h4>{p.name}</h4>
+          <p>{p.description}</p>
+        </div>
+        <span class="arrow-icon">→</span>
+      </a>
+    ))}
+  </div>
+</section>
