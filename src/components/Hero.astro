@@ -1,0 +1,64 @@
+---
+import { profile } from '../data/site';
+---
+<section id="hero" class="hero container">
+  <div class="hero-osc" id="osc-host" aria-hidden="true"></div>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <div class="hero-left">
+    <span class="hero-status">
+      <span class="pulse" aria-hidden="true"></span>
+      Available · Q3 / Q4 — let's build
+    </span>
+    <h1 class="hero-name">
+      <span data-decrypt data-decrypt-delay="100" data-decrypt-duration="900">Arun Suthar</span><span class="cursor-glyph" aria-hidden="true"></span>
+    </h1>
+    <p class="hero-role" data-decrypt data-decrypt-delay="900">{profile.title} · {profile.location}</p>
+    <p class="hero-blurb">{profile.blurb}</p>
+
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary" data-magnet data-magnet="0.25">
+        view projects <span class="arrow">→</span>
+      </a>
+      <a href={profile.socials.email} class="btn" data-magnet>
+        get in touch
+      </a>
+      <button class="btn" type="button" data-kbar-open>
+        <kbd style="font:inherit">⌘K</kbd> command
+      </button>
+    </div>
+
+    <div class="hero-meta">
+      {profile.stats.map((s) => (
+        <div><b>{s.value}</b>{s.label}</div>
+      ))}
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="term">
+      <div class="term-head">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="title">arun@portfolio:~/whoami</span>
+      </div>
+      <div class="term-body">
+        <div><span class="term-prompt">$</span> whoami</div>
+        <div class="term-out">{profile.handle}</div>
+        <div><span class="term-prompt">$</span> cat profile.jpg | render</div>
+        <div class="term-photo">
+          <img src="/profile.jpg" alt={profile.name} width="400" height="400" loading="eager" />
+        </div>
+        <div><span class="term-prompt">$</span> cat ~/.tags</div>
+        <div class="term-tags">
+          <span class="term-tag on">automotive</span>
+          <span class="term-tag on">linux drivers</span>
+          <span class="term-tag">freertos</span>
+          <span class="term-tag">qnx</span>
+          <span class="term-tag">tsn</span>
+          <span class="term-tag">ehsm</span>
+        </div>
+        <div style="margin-top:0.75rem"><span class="term-prompt">$</span> <span class="cursor-glyph" style="background:var(--accent);width:8px;height:14px;display:inline-block;vertical-align:-2px;animation:blink 1s steps(2) infinite"></span></div>
+      </div>
+    </div>
+  </div>
+</section>

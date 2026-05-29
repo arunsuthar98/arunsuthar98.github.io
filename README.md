@@ -1,129 +1,51 @@
-# Arun Suthar — Senior Firmware Engineer Portfolio
+# Arun Suthar — Portfolio (v2)
 
-> A modern, responsive portfolio website for Arun Suthar, a Senior Firmware Engineer specializing in automotive Ethernet, Linux device drivers, and real-time OS development.
+> Tech-native cyberpunk portfolio for [arunsuthar98.github.io](https://arunsuthar98.github.io).
+> Built with [Astro](https://astro.build), vanilla TypeScript, and one canvas.
 
-## 🌐 Live Site
+## ✦ Features
 
-[arunsuthar98.github.io](https://arunsuthar98.github.io)
+- **3 themes** — dark (default), light, terminal (CRT + scanlines)
+- **Boot sequence** intro — fake POST log on first visit
+- **Live oscilloscope** canvas in the hero
+- **Decrypting text** effect on hero name & role
+- **Custom cursor** + magnetic buttons + glitch hovers
+- **⌘K command palette** — terminal-style navigation
+- **JSON-LD Person** schema, OG tags, sitemap-ready
+- **Reduced-motion safe** — all effects respect `prefers-reduced-motion`
+- **GitHub Actions** — auto-build & deploy on `main` push
 
-## 📋 Features
+## ✦ Stack
 
-- **Hero Section** - Engaging introduction with profile picture and key stats
-- **About** - Professional background and domain expertise  
-- **Experience** - Detailed timeline of roles at Infineon, Marvell, Techiesms, and GTU Robotics Club
-- **Skills** - Comprehensive technical skills organized by category with LinkedIn verification badges
-- **Education** - Academic credentials and certifications
-- **Contact** - Functional contact form with email submission and direct social media links
-- **Responsive Design** - Fully mobile-optimized with smooth interactions
-- **Custom Cursor** - Elegant custom cursor dot animation
-- **Scroll Animations** - Smooth reveal animations as you scroll through sections
+| | |
+|---|---|
+| Framework | Astro 4 |
+| Lang | TypeScript (zero-JS by default; islands where needed) |
+| Styles | Hand-rolled CSS with CSS variables + 3 themes |
+| Forms | FormSubmit.co |
+| Host | GitHub Pages (user page) |
 
-## 🛠️ Tech Stack
+## ✦ Develop
 
-- **HTML5** - Semantic markup
-- **CSS3** - Modern styling with CSS variables, Grid, and Flexbox
-- **Vanilla JavaScript** - Interactive features (scroll reveal, custom cursor, form handling)
-- **FormSubmit.co** - Free backend for contact form submissions
-
-## 📁 Project Structure
-
-```
-arunsuthar98.github.io/
-├── index.html          # Single-page website
-├── profile_pic.jpg     # Profile photograph
-└── README.md           # This file
-```
-
-## 🚀 Getting Started
-
-### Prerequisites
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- Git (for version control)
-
-### Local Development
-
-1. Clone the repository:
 ```bash
-git clone https://github.com/arunsuthar98/arunsuthar98.github.io.git
-cd arunsuthar98.github.io
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # outputs to ./dist
+npm run preview  # serve the built site
 ```
 
-2. Open `index.html` in your browser:
-```bash
-# On Windows
-start index.html
+## ✦ Edit content
 
-# On macOS
-open index.html
+All copy lives in **`src/data/site.ts`** — profile, experience, projects, skills, education.
 
-# On Linux
-xdg-open index.html
-```
+## ✦ Deploy
 
-### Customization
+Pushing to `main` triggers `.github/workflows/deploy.yml` which builds and deploys to GitHub Pages.
+Enable Pages under **Settings → Pages → Source: GitHub Actions** once after the workflow runs.
 
-#### Update Profile Picture
-- Replace `profile_pic.jpg` with your own image
-- Image should be square format (recommended: 400×400px)
-- Keep the filename or update the `src` attribute in the HTML
+## ✦ Legacy
 
-#### Modify Contact Email
-Find the contact form in `index.html` and update the email address:
-```html
-<form action="https://formsubmit.co/your-email@example.com" method="POST">
-```
-
-#### Customize Content
-All text content is directly in `index.html`. Edit sections like:
-- Job titles and descriptions (Experience section)
-- Skills and expertise areas (Skills section)
-- Educational background (Education section)
-- Social media links (Contact section)
-
-## 📧 Contact Form Setup
-
-The contact form uses **FormSubmit.co** for email submissions:
-- No backend or server required
-- Emails are sent directly to the configured email address
-- Form redirects back to the homepage after submission
-- CAPTCHA is disabled for seamless user experience
-
-To receive emails, update the form's `action` attribute with your email address.
-
-## 🎨 Design Features
-
-- **Color Scheme**: Clean, professional dark and light contrast
-- **Typography**: Elegant serif fonts (DM Serif Display) with modern sans-serif
-- **Animations**: 
-  - Fade-up animations on scroll
-  - Custom cursor tracking
-  - Smooth transitions on hover
-  - Staggered reveal effects
-
-## 📱 Responsive Breakpoints
-
-- **Desktop** (900px+) - Full multi-column layout
-- **Tablet** (640px - 900px) - Single column experience
-- **Mobile** (< 640px) - Optimized mobile layout
-
-## 🔐 Privacy & Security
-
-- No analytics trackers
-- No cookies
-- No data collection
-- Contact form emails are handled by FormSubmit.co (open-source)
-
-## 📄 License
-
-© 2025 Arun Suthar. All rights reserved.
-
-## 🤝 Contributing
-
-This is a personal portfolio website. For inquiries or collaborations, please reach out via:
-- Email: [arunsuthar98@gmail.com](mailto:arunsuthar98@gmail.com)
-- LinkedIn: [linkedin.com/in/arunsuthar98](https://linkedin.com/in/arunsuthar98)
-- GitHub: [github.com/arunsuthar98](https://github.com/arunsuthar98)
+The previous single-file site is preserved at `legacy/index.html`.
 
 ---
-
-Built with ❤️ by Arun Suthar
+© Arun Suthar
