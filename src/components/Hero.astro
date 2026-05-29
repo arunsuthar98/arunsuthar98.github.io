@@ -2,15 +2,23 @@
 import { profile } from '../data/site';
 ---
 <section id="hero" class="hero">
-  <div class="pcb-bg" aria-hidden="true"></div>
+  <!-- Animated mesh gradient background -->
+  <div class="mesh-bg" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
   <div class="container hero-inner">
     <div class="hero-content">
       <span class="hero-badge">
         <span class="pulse" aria-hidden="true"></span>
         Open to opportunities
       </span>
-      <h1 class="hero-name">{profile.name}</h1>
-      <p class="hero-title">{profile.title} · {profile.location}</p>
+      <h1 class="hero-name gradient-text">{profile.name}</h1>
+      <p class="hero-title">
+        <span class="accent" data-typing="Firmware Engineer|Driver Developer|Embedded Systems|Protocol Software">Firmware Engineer</span> · {profile.location}
+      </p>
       <p class="hero-desc">{profile.blurb}</p>
 
       <div class="hero-actions">
@@ -27,8 +35,8 @@ import { profile } from '../data/site';
 
       <div class="hero-stats">
         {profile.stats.map((s) => (
-          <div class="stat-item">
-            <div class="stat-value">{s.value}</div>
+          <div class="stat-item" data-tilt>
+            <div class="stat-value" data-count={s.value}>{s.value}</div>
             <div class="stat-label">{s.label}</div>
           </div>
         ))}
@@ -36,8 +44,9 @@ import { profile } from '../data/site';
     </div>
 
     <div class="hero-photo-wrap">
+      <div class="hero-photo-ring" aria-hidden="true"></div>
       <div class="hero-photo-glow" aria-hidden="true"></div>
-      <img class="hero-photo" src="/profile.jpg" alt={profile.name} width="240" height="240" loading="eager" />
+      <img class="hero-photo" src="/profile.jpg" alt={profile.name} width="280" height="280" loading="eager" />
     </div>
   </div>
 </section>
