@@ -1,0 +1,60 @@
+---
+import { profile } from '../data/site';
+---
+<section id="contact" class="container">
+  <div class="reveal">
+    <span class="eyebrow">// 06 — contact</span>
+    <h2 class="section-title">Let's build<br>something low-latency.</h2>
+    <p class="section-sub">
+      Drop a message about an opportunity, a firmware collab, or a TSN question. I read everything.
+    </p>
+  </div>
+
+  <div class="contact-wrap">
+    <form
+      class="contact-form reveal"
+      action={`https://formsubmit.co/${profile.email}`}
+      method="POST"
+    >
+      <input type="hidden" name="_subject" value="New message from portfolio" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_template" value="table" />
+
+      <div>
+        <label for="name">name</label>
+        <input id="name" name="name" type="text" required autocomplete="name" />
+      </div>
+      <div>
+        <label for="email">email</label>
+        <input id="email" name="email" type="email" required autocomplete="email" />
+      </div>
+      <div>
+        <label for="msg">message</label>
+        <textarea id="msg" name="message" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary" data-magnet>
+        send transmission <span class="arrow">→</span>
+      </button>
+    </form>
+
+    <aside class="contact-direct reveal">
+      <h3>Or skip the form.</h3>
+      <p>I'm easiest to reach over email or LinkedIn DMs.</p>
+      <div class="contact-quick">
+        <a class="btn" href={profile.socials.email}>✉ {profile.email}</a>
+        <a class="btn" href={profile.socials.linkedin} target="_blank" rel="noopener">in/ {profile.handle}</a>
+        <a class="btn" href={profile.socials.github} target="_blank" rel="noopener">gh/ {profile.handle}</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-row">
+    <span>© <span data-year>2026</span> {profile.name} · built with Astro · deployed on GitHub Pages</span>
+    <span>
+      <a href="https://github.com/arunsuthar98/arunsuthar98.github.io" target="_blank" rel="noopener">source ↗</a>
+      · press <kbd style="font:inherit">⌘K</kbd> anywhere
+    </span>
+  </div>
+</footer>

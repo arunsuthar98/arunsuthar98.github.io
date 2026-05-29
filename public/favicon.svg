@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="12" fill="#07080b"/>
+  <text x="50%" y="55%" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="34" font-weight="700" fill="#00ffd1" dominant-baseline="middle">A</text>
+  <rect x="46" y="34" width="6" height="14" fill="#00ffd1">
+    <animate attributeName="opacity" values="1;0;1" dur="1s" repeatCount="indefinite"/>
+  </rect>
+</svg>

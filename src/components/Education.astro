@@ -1,0 +1,19 @@
+---
+import { education } from '../data/site';
+---
+<section id="education" class="container">
+  <div class="reveal">
+    <span class="eyebrow">// 05 — education</span>
+    <h2 class="section-title">Credentials.</h2>
+  </div>
+
+  <div class="edu-grid">
+    {education.map((e) => (
+      <div class="edu-card reveal">
+        <div class="edu-deg">{e.degree}</div>
+        <div class="edu-school">{e.school}</div>
+        <div class="edu-period">{e.period}</div>
+      </div>
+    ))}
+  </div>
+</section>

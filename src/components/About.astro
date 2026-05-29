@@ -1,0 +1,50 @@
+---
+import { profile } from '../data/site';
+---
+<section id="about" class="container">
+  <div class="reveal">
+    <span class="eyebrow">// 01 — about</span>
+    <h2 class="section-title">Engineer at the edge<br>of hardware & software.</h2>
+  </div>
+
+  <div class="about-grid">
+    <div class="prose reveal">
+      <p>
+        I'm a firmware engineer who lives at the interface between silicon and code.
+        Today I work on <strong>automotive Ethernet</strong> — the network fabric that
+        connects ECUs in modern cars — building Linux drivers, QNX integrations, and
+        real-time stacks that have to be both <em>fast</em> and <em>provably correct</em>.
+      </p>
+      <p>
+        I've shipped firmware for <strong>Infineon AURIX</strong> and
+        <strong>Marvell 88Q2xxx</strong> silicon, contributed patches upstream to
+        <strong>lwIP</strong>, and built validation tooling like a port of
+        <strong>iperf3</strong> for embedded test harnesses. I care deeply about
+        zero-copy paths, MISRA-clean C, ASIL-aware design, and clear
+        boundaries between the bare metal and the application layer.
+      </p>
+      <p>
+        When I'm not at work, I tinker with <strong>TSN</strong> (Time-Sensitive Networking)
+        in a small home lab, publish IoT projects on Hackster, and pretend my soldering iron
+        is part of my permanent toolkit.
+      </p>
+    </div>
+
+    <aside class="reveal">
+      <div class="info-card">
+        <h4>contact · location</h4>
+        <div class="info-row"><span class="ico mono">@</span><a href={profile.socials.email}>{profile.email}</a></div>
+        <div class="info-row"><span class="ico mono">↳</span><span>{profile.location}</span></div>
+        <div class="info-row"><span class="ico mono">●</span><span>Open to senior firmware / kernel roles</span></div>
+      </div>
+      <div class="info-card">
+        <h4>online presence</h4>
+        <div class="social-row">
+          <a class="social-btn" href={profile.socials.github} target="_blank" rel="noopener">github ↗</a>
+          <a class="social-btn" href={profile.socials.linkedin} target="_blank" rel="noopener">linkedin ↗</a>
+          <a class="social-btn" href={profile.socials.hackster} target="_blank" rel="noopener">hackster ↗</a>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>

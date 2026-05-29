@@ -1,0 +1,21 @@
+---
+import { skills } from '../data/site';
+---
+<section id="skills" class="container">
+  <div class="reveal">
+    <span class="eyebrow">// 04 — skills</span>
+    <h2 class="section-title">Toolkit.</h2>
+    <p class="section-sub">Languages, platforms, silicon, tooling, process — the stack I reach for.</p>
+  </div>
+
+  <div class="skill-grid">
+    {skills.map((g) => (
+      <div class="skill-card reveal">
+        <h4>{g.group}</h4>
+        <div class="skill-list">
+          {g.items.map((s) => <span class="chip">{s}</span>)}
+        </div>
+      </div>
+    ))}
+  </div>
+</section>

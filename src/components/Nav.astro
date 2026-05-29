@@ -1,0 +1,27 @@
+---
+import { profile } from '../data/site';
+const links = [
+  { href: '#about', label: '01 / about' },
+  { href: '#experience', label: '02 / work' },
+  { href: '#projects', label: '03 / projects' },
+  { href: '#skills', label: '04 / skills' },
+  { href: '#contact', label: '05 / contact' },
+];
+---
+<nav class="nav" aria-label="Primary">
+  <a href="#hero" class="nav-logo">
+    arun<span style="color:var(--accent)">.</span>sh
+    <span class="blink" aria-hidden="true"></span>
+  </a>
+  <ul class="nav-links">
+    {links.map((l) => <li><a href={l.href}>{l.label}</a></li>)}
+  </ul>
+  <div class="nav-tools">
+    <button class="nav-kbd" data-kbar-open type="button" aria-label="Open command palette">
+      <kbd>⌘</kbd><kbd>K</kbd>
+    </button>
+    <button class="theme-cycle" data-theme-cycle type="button" aria-label="Cycle theme">
+      <span data-theme-label>dark</span>
+    </button>
+  </div>
+</nav>
