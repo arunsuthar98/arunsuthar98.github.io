@@ -19,7 +19,7 @@ export const profile = {
   stats: [
     { value: '3+', label: 'Years Experience' },
     { value: '2', label: 'Semiconductor Cos' },
-    { value: 'M.Tech', label: 'VLSI · MNIT Jaipur' },
+    { value: 'M.Tech', label: 'Embedded · MNIT' },
     { value: '6+', label: 'IoT Projects' },
   ],
 };
@@ -56,7 +56,7 @@ export const experience = [
     company: 'Infineon Technologies',
     logo: '/logos/infineon.png',
     role: 'Senior Firmware Engineer',
-    period: '2024 — Present',
+    period: '2025 — Present',
     location: 'Bengaluru, India',
     color: '#0072CE',
     summary:
@@ -78,7 +78,7 @@ export const experience = [
     company: 'Marvell Semiconductor',
     logo: '/logos/marvell.png',
     role: 'Firmware Engineer',
-    period: '2022 — 2024',
+    period: '2023 — 2025',
     location: 'Bengaluru, India',
     color: '#CC0000',
     summary:
@@ -97,7 +97,7 @@ export const experience = [
     company: 'Techiesms',
     logo: '/logos/techiesms.png',
     role: 'IoT Developer (Freelance)',
-    period: '2020 — 2022',
+    period: '2022',
     location: 'Remote',
     color: '#f9a826',
     summary:
@@ -121,7 +121,7 @@ export const experience = [
     company: 'GTU Robotics Club',
     logo: '/logos/gtu-robotics.png',
     role: 'Member — Embedded Systems',
-    period: '2018 — 2020',
+    period: '2019 — 2020',
     location: 'Ahmedabad, India',
     color: '#7c5cff',
     summary: 'Built robots for ABU Robocon 2020. Worked on motor control, sensor fusion, and embedded firmware.',
@@ -210,13 +210,13 @@ export const education = [
   {
     school: 'MNIT Jaipur',
     logo: '/logos/mnit.png',
-    degree: 'M.Tech — VLSI Design',
-    period: '2020 — 2022',
+    degree: 'M.Tech — Embedded Systems',
+    period: '2022 — 2024',
   },
   {
     school: 'GEC Gandhinagar (GTU)',
     logo: '/logos/gec-gandhinagar.avif',
-    degree: 'B.E. — Electronics & Communication',
-    period: '2016 — 2020',
+    degree: 'B.Tech — Electronics & Communication',
+    period: '2017 — 2021',
   },
 ];
